@@ -43,6 +43,35 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Plant         Plant[]
+}
+
+// {"id": "P_01_HOME", "light": 94, "soil_humidity": 40, "air_humidity": 65, "temperature": 94}
+
+model Plant {
+  id           String         @id @default(cuid())
+  name         String
+  light        Int
+  soilHumidity Int
+  airHumidity  Int
+  temperature  Int
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?
+  plantHistory PlantHistory[]
+}
+
+model PlantHistory {
+  id           String   @id @default(cuid())
+  light        Int
+  soilHumidity Int
+  airHumidity  Int
+  temperature  Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  plant        Plant    @relation(fields: [plantId], references: [id], onDelete: Cascade)
+  plantId      String
 }
 
 model VerificationToken {
