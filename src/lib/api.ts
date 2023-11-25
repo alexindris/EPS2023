@@ -1,4 +1,4 @@
-import { LoginValidatorType } from '@/validators/login.validator';
+import { SignUpType } from '@/validators/signup.validator';
 import useSWR from 'swr';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -28,11 +28,11 @@ export const useGetSpecificFile = (id: string) => {
   };
 };
 
-export const createUser = async (data: LoginValidatorType) => {
+export const createUser = async (data: SignUpType) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
     body: JSON.stringify(data),
   });
 
-  return response.json();
+  return response;
 };
