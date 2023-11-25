@@ -1,15 +1,17 @@
-import { Montserrat } from 'next/font/google';
 import '@/styles/globals.css';
 import { ReactNode } from 'react';
+import { NavBar } from '@/components/NavBar';
+import { montserrat } from '@/lib/fonts';
 import { Providers } from './providers';
-
-const montserrat = Montserrat({ subsets: ['latin'], display: 'swap' });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en'>
-      <body className={montserrat.className}>
-        <Providers>{children}</Providers>
+      <body className={`${montserrat.className} bg-green-bg `}>
+        <Providers>
+          <NavBar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
