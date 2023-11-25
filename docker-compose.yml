@@ -1,0 +1,60 @@
+version: '3'
+services:
+  app:
+    image: node:lts
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+      - '~/.ssh:/home/node/.ssh:ro'
+    networks:
+      - chainsaw-project
+    environment:
+      - SHELL=/bin/bash # Set the SHELL environment variable
+    command: sleep infinity
+  mysql:
+    image: 'mysql/mysql-server:latest'
+    ports:
+      - '${DB_PORT:-3306}:${DB_PORT:-3306}'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_TCP_PORT: ${DB_PORT:-3306}
+    volumes:
+      - 'chainsaw-project-mysql:/var/lib/mysql'
+    networks:
+      - chainsaw-project
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+      retries: 3
+      timeout: 5s
+  s3-storage:
+    image: localstack/localstack:0.12.5
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DEFAULT_REGION=${AWS_DEFAULT_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
+    ports:
+      - '4566:4566'
+    volumes:
+      - './s3-storage/.init:/docker-entrypoint-initaws.d'
+      - './s3-storage/.localstack:/tmp/localstack'
+    networks:
+      chainsaw-project:
+        aliases:
+          - s3-storage
+          - s3storage.s3-storage
+
+networks:
+  chainsaw-project:
+    driver: bridge
+
+volumes:
+  chainsaw-project-mysql:
+    driver: local

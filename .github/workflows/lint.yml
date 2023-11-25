@@ -1,0 +1,52 @@
+# https://github.com/kentcdodds/kentcdodds.com/blob/main/.github/workflows/deployment.yml
+name: Code Check
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    types:
+      - opened
+      - ready_for_review
+      - synchronize
+concurrency:
+  group: ${{ github.job }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    if: github.event.pull_request.draft == false
+    name: ⬣ Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+      - name: ⎔ Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: 📥 Download deps
+        run: pnpm install
+
+      - name: 🔬 Lint
+        run: pnpm lint:strict
+
+      - name: 💅 Prettier check
+        run: pnpm format:check
+
+      - name: 🔎 Type check
+        run: pnpm typecheck
+
+      # - name: 🃏 Run jest
+      #   run: pnpm test:coverage
+
+      # - name: 🔧 Run Build
+      #   run: pnpm build

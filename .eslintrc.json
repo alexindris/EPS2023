@@ -1,0 +1,47 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb-base",
+    "plugin:storybook/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": ["node_modules/"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "test.{ts,tsx}", // repos with a single test file
+          "test-*.{ts,tsx}", // repos with multiple top-level test files
+          "**/*{.,_}{test,spec}.{ts,tsx}", // tests where the extension or filename suffix denotes that it is a test
+          "**/jest.config.js", // jest config
+          "**/jest.setup.js" // jest setup
+        ],
+        "optionalDependencies": false
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/app/**/{page,layout,error,loading}.tsx"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["**/*.stories.{js,jsx,ts,tsx,mdx}"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.spec.tsx"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
