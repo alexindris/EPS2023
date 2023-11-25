@@ -121,7 +121,7 @@ export default function SignUpPage() {
         </div>
 
         <div className=' flex justify-center items-center p-5 '>
-          <SubmitButton text='Iniciar sessio'>
+          <SubmitButton text='Completar registre'>
             <IoMdArrowForward className='ml-2' />
           </SubmitButton>
           <CustomToastContainer />
