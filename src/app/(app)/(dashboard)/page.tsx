@@ -1,32 +1,55 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 'use client';
+
+import { SubmitButton } from '@/components/Buttons/SubmitButton';
+import { Plant } from '@/components/Plant';
+import Link from 'next/link';
+import { IoMdArrowForward } from 'react-icons/io';
 
 export default function Page() {
   return (
-    <>
-      <span className='inline-flex items-laenter rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10'>
-        Badge
-      </span>
-      <span className='inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10'>
-        Badge
-      </span>
-    </>
+    <div className='mx-72 items-center text-center'>
+      <h1 className='mb-10 text-white text-6xl p-4 font-bold mt-9 '>
+        Aquest es el teu Hort, que vols fer?
+      </h1>
+
+      <div className='grid grid-cols-3 gap-16'>
+        <Plant
+          plantName='oregano'
+          props={{
+            light: 'sunny',
+            temperature: 'hot',
+            soilHumidity: 'dry',
+            // airHumidity: 'dry',
+          }}
+        />
+        <Plant
+          plantName='fresa'
+          props={{
+            light: 'sunny',
+            temperature: 'hot',
+            soilHumidity: 'dry',
+            // airHumidity: 'dry',
+          }}
+        />
+        <Plant
+          plantName='coliflor'
+          props={{
+            light: 'sunny',
+            temperature: 'hot',
+            soilHumidity: 'dry',
+            // airHumidity: 'dry',
+          }}
+        />
+      </div>
+
+      <div className='h-64' />
+      <Link href='/dashboard/add-plant'>
+        <SubmitButton text='Afegir nova planta'>
+          <IoMdArrowForward className='ml-2' />
+        </SubmitButton>
+      </Link>
+    </div>
   );
 }
