@@ -17,6 +17,7 @@ const config: Config = {
         'green-nav': '#74943F',
         'green-bg': '#ABB441',
         'orange-btn': '#DD6B20',
+        'light-green-slide': '#D6E7BA',
       },
     },
   },
