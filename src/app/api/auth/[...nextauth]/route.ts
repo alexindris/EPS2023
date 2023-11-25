@@ -1,4 +1,3 @@
-import { logger } from '@/lib/logger';
 import prisma from '@/lib/prisma';
 import { compare } from 'bcrypt';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
@@ -53,7 +52,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     session: ({ session, token }) => {
-      logger.info('Session Callback', { session, token });
       return {
         ...session,
         user: {
@@ -64,7 +62,6 @@ export const authOptions: NextAuthOptions = {
       };
     },
     jwt: ({ token, user }) => {
-      logger.info('JWT Callback', { token, user });
       if (user) {
         const u = user as unknown as any;
         return {
