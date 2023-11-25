@@ -9,6 +9,11 @@ const envSchema = z.object({
   AWS_BUCKET_NAME: z.string(),
   AWS_ENDPOINT: z.string(),
   AWS_DEFAULT_REGION: z.string(),
+  MQTT_HOST: z.string(),
+  MQTT_PORT: z.string(),
+  MQTT_USERNAME: z.string(),
+  MQTT_PASSWORD: z.string(),
+  MQTT_TOPIC: z.string(),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
@@ -26,4 +31,9 @@ export const {
   AWS_BUCKET_NAME,
   AWS_ENDPOINT,
   AWS_DEFAULT_REGION,
+  MQTT_HOST,
+  MQTT_PORT,
+  MQTT_USERNAME,
+  MQTT_PASSWORD,
+  MQTT_TOPIC,
 } = parsedEnv.data;
