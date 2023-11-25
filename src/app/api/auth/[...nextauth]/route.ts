@@ -1,6 +1,6 @@
 import { logger } from '@/lib/logger';
 import prisma from '@/lib/prisma';
-import { compareSync } from 'bcrypt';
+import { compare } from 'bcrypt';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -31,12 +31,11 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        if (
-          user &&
-          user.password &&
-          compareSync(credentials.password, user.password) &&
-          user.emailVerified !== null
-        ) {
+        const comparedPassword = await compare(
+          credentials.password,
+          user?.password ?? '',
+        );
+        if (user && user.password && comparedPassword) {
           return {
             name: user.name,
             email: user.email,
