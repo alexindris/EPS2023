@@ -12,6 +12,7 @@ import {
 } from '@/validators/login.validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
@@ -91,6 +92,12 @@ export default function LoginPage() {
           )}
         </div>
         <div className=' flex justify-center items-center p-5 '>
+          <Link href='/signup'>
+            <SubmitButton text='Registrar-se'>
+              <IoMdArrowForward className='ml-2' />
+            </SubmitButton>
+          </Link>
+          <div className='w-16' />
           <SubmitButton text='Iniciar sessio'>
             <IoMdArrowForward className='ml-2' />
           </SubmitButton>
