@@ -27,6 +27,7 @@ export const addIncomingPlanData = async (data: unknown) => {
         temperature: parsedData.temperature,
         plantHistory: {
           create: {
+            date: new Date(),
             light: parsedData.light,
             soilHumidity: parsedData.soil_humidity,
             airHumidity: parsedData.air_humidity,
@@ -58,6 +59,17 @@ export const getAllPlantsData = async (userId: string) => {
   return plants;
 };
 
+export const getPlantById = async (plantId: string, userId: string) => {
+  const plant = await prisma.plant.findUnique({
+    where: {
+      id: plantId,
+      userId,
+    },
+  });
+
+  return plant;
+};
+
 export const uploadNewPlant = async (
   userId: string,
   name: string,
@@ -76,4 +88,27 @@ export const uploadNewPlant = async (
   });
 
   return plant;
+};
+
+export const getHistory = async (plantId: string, days: number) => {
+  const firstDay = new Date();
+  const today = new Date();
+  firstDay.setDate(firstDay.getDate() - days);
+  const result = await prisma.plantHistory.groupBy({
+    by: ['date'],
+    where: {
+      plantId,
+      createdAt: {
+        gte: firstDay.toISOString(),
+        lte: today.toISOString(),
+      },
+    },
+    _avg: {
+      light: true,
+      soilHumidity: true,
+      airHumidity: true,
+      temperature: true,
+    },
+  });
+  return result;
 };
