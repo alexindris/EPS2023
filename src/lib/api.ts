@@ -77,3 +77,17 @@ export const deleteUser = async () => {
 
   return response;
 };
+
+export const useGetPlantHistoric = (id: string) => {
+  const { data, isLoading, error, mutate } = useSWR(
+    `/api/plants/${id}/historic`,
+    fetcher,
+  );
+
+  return {
+    data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
