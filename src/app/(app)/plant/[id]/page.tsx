@@ -38,11 +38,11 @@ export default function Page({ params }: { params: { id: string } }) {
           </p>
           <div className='flex flex-row justify-between space-x-4'>
             <CircleGraph
-              texto='Humedad de la planta'
+              texto='Humitat de la planta'
               porcentaje={data.plant.soilHumidity}
             />
             <CircleGraph
-              texto='Humedad del aire'
+              texto='Humitat del aire'
               porcentaje={data.plant.airHumidity}
             />
             <CircleGraph
@@ -50,11 +50,11 @@ export default function Page({ params }: { params: { id: string } }) {
               porcentaje={data.plant.temperature}
               degrees={true}
             />
-            <CircleGraph texto='Luz' porcentaje={data.plant.light} />
+            <CircleGraph texto='Llum' porcentaje={data.plant.light} />
           </div>
           <Link href={`/historic/${data.plant.id}`}>
             <StandardButton
-              text='Afegir nova planta'
+              text='Històric'
               className='rounded-full text-white bg-orange-btn p-5 text-xs mt-4'
             >
               <IoMdArrowForward className='ml-2' />
