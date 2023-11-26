@@ -28,7 +28,7 @@ export default function LoginPage() {
     resolver: zodResolver(LoginValidatorSchema),
   });
 
-  const callbackUrl = '/';
+  const callbackUrl = '/home';
 
   const router = useRouter();
   const onSubmit = async (data: LoginValidatorType) => {
