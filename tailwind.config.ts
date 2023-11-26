@@ -18,6 +18,8 @@ const config: Config = {
         'green-bg': '#ABB441',
         'orange-btn': '#DD6B20',
         'light-green-slide': '#D6E7BA',
+        pop: '#ECF4DF',
+        'text-input': '#4C6425',
       },
     },
   },
