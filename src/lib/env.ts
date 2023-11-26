@@ -3,7 +3,7 @@ import { logger } from './logger';
 
 const envSchema = z.object({
   NODE_ENV: z.string(),
-  NEXTAUTH_URL: z.string(),
+  NEXTAUTH_URL: z.string().optional(),
   AWS_ACCESS_KEY_ID: z.string(),
   AWS_SECRET_ACCESS_KEY: z.string(),
   AWS_BUCKET_NAME: z.string(),
