@@ -36,9 +36,7 @@ export const UserMenu = () => {
                     width={51}
                     height={49}
                   />
-                  <p className='text-white font-bold text-1xl mt-2'>
-                    ¿Quién eres?
-                  </p>
+                  <p className='text-white font-bold text-1xl mt-2'>Qui ets?</p>
                 </div>
               </div>
             </div>
@@ -55,7 +53,7 @@ export const UserMenu = () => {
                   </Link>
                   <Link href='/logout'>
                     <SubmitButton
-                      text='Cerrar sesión'
+                      text='Tancar sessió'
                       className='rounded-full text-white bg-orange-btn p-5 text-xs'
                     >
                       <IoMdArrowForward className='ml-2' />

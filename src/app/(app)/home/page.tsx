@@ -18,18 +18,19 @@ export default function Page() {
       </h1>
 
       <div className='grid grid-cols-3 gap-16'>
-        {data?.plants.map((plant: any) => (
-          <Plant
-            key={plant.id}
-            plantName={plant.imageURL}
-            props={{
-              light: plant.light,
-              temperature: plant.temperature,
-              soilHumidity: plant.soilHumidity,
-              // airHumidity: 'dry',
-            }}
-          />
-        ))}
+        {data &&
+          data.plants.map((plant: any) => (
+            <Plant
+              key={plant.id}
+              plantName={plant.imageURL}
+              plantId={plant.id}
+              props={{
+                light: plant.light,
+                temperature: plant.temperature,
+                soilHumidity: plant.soilHumidity,
+              }}
+            />
+          ))}
       </div>
 
       <div className='h-64' />
