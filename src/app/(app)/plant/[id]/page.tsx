@@ -6,8 +6,9 @@ import { useGetOnePlant } from '@/lib/api';
 import Image from 'next/image';
 
 export default function Page({ params }: { params: { id: string } }) {
-  const { data } = useGetOnePlant(params.id);
+  const { data, isLoading } = useGetOnePlant(params.id);
 
+  if (isLoading) return <div>Loading...</div>;
   return (
     <>
       <div className='mx-80 items-center text-center flex py-10'>
