@@ -24,31 +24,31 @@ logger.add(
     ),
   }),
 );
-
-logger.add(
-  new winston.transports.File({
-    filename: 'logs/error.log',
-    level: 'error',
-    format: winston.format.combine(
-      winston.format.splat(),
-      winston.format.colorize(),
-    ),
-  }),
-);
-
-logger.add(
-  new winston.transports.File({
-    filename: 'logs/debug.log',
-    level: 'debug',
-    format: winston.format.combine(
-      winston.format.splat(),
-      winston.format.colorize(),
-    ),
-    maxFiles: 5,
-    maxsize: 5242880, // 5MB
-    zippedArchive: true,
-  }),
-);
+if (process.env.NODE_ENV === 'production') {
+  logger.add(
+    new winston.transports.File({
+      filename: 'logs/error.log',
+      level: 'error',
+      format: winston.format.combine(
+        winston.format.splat(),
+        winston.format.colorize(),
+      ),
+    }),
+  );
+  logger.add(
+    new winston.transports.File({
+      filename: 'logs/debug.log',
+      level: 'debug',
+      format: winston.format.combine(
+        winston.format.splat(),
+        winston.format.colorize(),
+      ),
+      maxFiles: 5,
+      maxsize: 5242880, // 5MB
+      zippedArchive: true,
+    }),
+  );
+}
 
 const stream = {
   write: (message: string) => {
