@@ -42,6 +42,9 @@ jobs:
       - name: 💅 Prettier check
         run: pnpm format:check
 
+      - name: 📝 Generate prisma
+        run: pnpm generate
+
       - name: 🔎 Type check
         run: pnpm typecheck
 
