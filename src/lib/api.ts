@@ -1,5 +1,6 @@
 import { SignUpType } from '@/validators/signup.validator';
 import useSWR from 'swr';
+import { ModifyProfileType } from '@/validators/modifyProfile.validator';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -55,6 +56,23 @@ export const createNewPlant = async (formData: FormData) => {
     headers: {
       enctype: 'multipart/form-data',
     },
+  });
+
+  return response;
+};
+
+export const updateUser = async (data: ModifyProfileType) => {
+  const response = await fetch('/api/auth/profile', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+
+  return response;
+};
+
+export const deleteUser = async () => {
+  const response = await fetch('/api/auth/profile', {
+    method: 'DELETE',
   });
 
   return response;
