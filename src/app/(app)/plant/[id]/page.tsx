@@ -74,21 +74,21 @@ export default function Page({ params }: { params: { id: string } }) {
         <div className='flex flex-wrap justify-between mt-4'>
           <Remediation
             texto={
-              'L orenga és una planta aromàtica molt resistent que, amb els cures adequats, pot produir flors i fulles saludables fins a 5 anys. Tot i que la seva durada pot ser superior a aquest període de temps, es recomana sembrar i utilitzar una planta nova transcorregut aquest temps, almenys si s&#39;utilitzen les seves fulles per cuinar.'
+              "L orenga és una planta aromàtica molt resistent que, amb els cures adequats, pot produir flors i fulles saludables fins a 5 anys. Tot i que la seva durada pot ser superior a aquest període de temps, es recomana sembrar i utilitzar una planta nova transcorregut aquest temps, almenys si s'utilitzen les seves fulles per cuinar."
             }
             number={1}
           />
 
           <Remediation
             texto={
-              'Aquesta planta aromàtica no és de les que més adob requereix, ja que creix bé sense massa estímul. Tot i això, i si ho desitges, pots abonar-la dues vegades l&#39;any a la primavera i a l&#39;estiu utilitzant algun adob natural o artificial, però tingues en compte que per fer-ho per primera vegada és convenient que la teva planta hagi assolit almenys els 15 centímetres d&#39;alçada i compti amb ramificacions.'
+              "Aquesta planta aromàtica no és de les que més adob requereix, ja que creix bé sense massa estímul. Tot i això, i si ho desitges, pots abonar-la dues vegades l'any a la primavera i a l'estiu utilitzant algun adob natural o artificial, però tingues en compte que per fer-ho per primera vegada és convenient que la teva planta hagi assolit almenys els 15 centímetres d'alçada i compti amb ramificacions."
             }
             number={2}
           />
 
           <Remediation
             texto={
-              'És molt important tenir en compte que aquesta planta suporta molt bé les temperatures extremes tant altes com baixes, això es tradueix en què el seu reg ha de ser moderat amb la finalitat d&#39;evitar que es pugui podrir. Tingues en compte que la terra només ha de regar-se quan es trobi completament seca, sent més freqüent el reg a l&#39;hivern que a l&#39;estiu.'
+              "És molt important tenir en compte que aquesta planta suporta molt bé les temperatures extremes tant altes com baixes, això es tradueix en què el seu reg ha de ser moderat amb la finalitat d'evitar que es pugui podrir. Tingues en compte que la terra només ha de regar-se quan es trobi completament seca, sent més freqüent el reg a l'hivern que a l'estiu."
             }
             number={3}
           />
