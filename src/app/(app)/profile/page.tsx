@@ -41,7 +41,7 @@ export default function ProfilePage() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='mx-80 items-center text-center flex py-10'>
+        <div className='mx-40 items-center text-center flex py-10'>
           <div className='w-1/3'>
             <Image
               className='mx-auto my-auto rounded-full object-cover'

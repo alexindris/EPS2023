@@ -12,7 +12,7 @@ export default function Page() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className='mx-72 items-center text-center'>
+    <div className='mx-32 items-center text-center'>
       <h1 className='mb-10 text-white text-6xl p-4 font-bold mt-9 '>
         Aquest es el teu Hort, que vols fer?
       </h1>
