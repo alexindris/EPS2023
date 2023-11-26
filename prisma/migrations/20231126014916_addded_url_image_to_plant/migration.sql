@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `Plant` ADD COLUMN `imageURL` VARCHAR(191) NULL;
