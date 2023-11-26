@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 'use client';
 
 import { SubmitButton } from '@/components/Buttons/SubmitButton/SubmitButton';
@@ -43,7 +41,9 @@ export default function SignUpPage() {
   return (
     <div className='mx-72 items-center text-center'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1 className='text-white text-6xl p-4 font-bold mt-9 '>Registra't</h1>
+        <h1 className='text-white text-6xl p-4 font-bold mt-9 '>
+          Registra&apos;t
+        </h1>
         <h3 className='text-white text-3xl p-4 my-4'>
           Les teves plantes estan ansioses perque les cuidis!
         </h3>

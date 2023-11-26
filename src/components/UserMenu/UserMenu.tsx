@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import Image from 'next/image';
 import { Popover, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
@@ -46,7 +45,7 @@ export const UserMenu = () => {
             <div className='relative overflow-hidden rounded-lg shadow-lg ring-1 ring-light-green-slide top-[-10px] -z-10'>
               <div className=' bg-light-green-slide w-40  py-4 -z-10 pt-8'>
                 <div className='flex flex-col items-center justify-center text-center'>
-                  <Link href='/dashboard/add-plant'>
+                  <Link href='/profile'>
                     <SubmitButton
                       text='Editar perfil'
                       className='rounded-full text-white bg-orange-btn p-5 text-xs mb-4'
@@ -54,7 +53,7 @@ export const UserMenu = () => {
                       <IoMdArrowForward className='ml-2' />
                     </SubmitButton>
                   </Link>
-                  <Link href='/dashboard/add-plant'>
+                  <Link href='/logout'>
                     <SubmitButton
                       text='Cerrar sesión'
                       className='rounded-full text-white bg-orange-btn p-5 text-xs'

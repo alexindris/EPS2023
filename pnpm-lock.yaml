@@ -53,6 +53,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.48.2
     version: 7.48.2(react@18.2.0)
+  react-icons:
+    specifier: ^4.12.0
+    version: 4.12.0(react@18.2.0)
   react-toastify:
     specifier: ^9.1.3
     version: 9.1.3(react-dom@18.2.0)(react@18.2.0)
@@ -178,9 +181,6 @@ devDependencies:
   prisma:
     specifier: ^5.5.2
     version: 5.5.2
-  react-icons:
-    specifier: ^4.12.0
-    version: 4.12.0(react@18.2.0)
   storybook:
     specifier: ^7.5.3
     version: 7.5.3
@@ -13335,7 +13335,7 @@ packages:
       react: '*'
     dependencies:
       react: 18.2.0
-    dev: true
+    dev: false
 
   /react-inspector@6.0.2(react@18.2.0):
     resolution: {integrity: sha512-x+b7LxhmHXjHoU/VrFAzw5iutsILRoYyDq97EDYdFpPLcvqtEzk4ZSZSQjnFPbr5T57tLXnHcqFYoN1pI6u8uQ==}

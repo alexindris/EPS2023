@@ -16,7 +16,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { IoMdArrowForward } from 'react-icons/io';
 
 export default function LoginPage() {
@@ -28,7 +27,7 @@ export default function LoginPage() {
     resolver: zodResolver(LoginValidatorSchema),
   });
 
-  const callbackUrl = '/';
+  const callbackUrl = '/dashboard';
 
   const router = useRouter();
   const onSubmit = async (data: LoginValidatorType) => {
