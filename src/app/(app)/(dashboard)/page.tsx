@@ -1,9 +1,9 @@
 'use client';
 
-import { SubmitButton } from '@/components/Buttons/SubmitButton';
 import Link from 'next/link';
 import { IoMdArrowForward } from 'react-icons/io';
 import Image from 'next/image';
+import { StandardButton } from '@/components/Buttons/StandardButton';
 
 export default function Page() {
   return (
@@ -23,14 +23,14 @@ export default function Page() {
         <div className='h-2' />
         <div className='flex justify-center space-x-10'>
           <Link href='/home'>
-            <SubmitButton text='Anar al teu hort'>
+            <StandardButton text='Anar al teu hort'>
               <IoMdArrowForward className='ml-2' />
-            </SubmitButton>
+            </StandardButton>
           </Link>
           <Link href='/signup'>
-            <SubmitButton text='Crear un hort'>
+            <StandardButton text='Crear un hort'>
               <IoMdArrowForward className='ml-2' />
-            </SubmitButton>
+            </StandardButton>
           </Link>
         </div>
         <div className='h-10' />
@@ -96,9 +96,9 @@ export default function Page() {
             Si encara no tens un hort, crea&apos;l ara gratuïtament!
           </h1>
           <Link href='/signup'>
-            <SubmitButton text='Crear un hort'>
+            <StandardButton text='Crear un hort'>
               <IoMdArrowForward className='ml-2' />
-            </SubmitButton>
+            </StandardButton>
           </Link>
         </div>
       </div>

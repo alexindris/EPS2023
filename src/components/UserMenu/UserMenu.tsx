@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { Popover, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { SubmitButton } from '@/components/Buttons/SubmitButton';
 import Link from 'next/link';
 import { IoMdArrowForward } from 'react-icons/io';
+import { StandardButton } from '@/components/Buttons/StandardButton';
 
 export const UserMenu = () => {
   return (
@@ -44,20 +44,20 @@ export const UserMenu = () => {
               <div className=' bg-light-green-slide w-40  py-4 -z-10 pt-8'>
                 <div className='flex flex-col items-center justify-center text-center'>
                   <Link href='/profile'>
-                    <SubmitButton
+                    <StandardButton
                       text='Editar perfil'
                       className='rounded-full text-white bg-orange-btn p-5 text-xs mb-4'
                     >
                       <IoMdArrowForward className='ml-2' />
-                    </SubmitButton>
+                    </StandardButton>
                   </Link>
                   <Link href='/logout'>
-                    <SubmitButton
+                    <StandardButton
                       text='Tancar sessió'
                       className='rounded-full text-white bg-orange-btn p-5 text-xs'
                     >
                       <IoMdArrowForward className='ml-2' />
-                    </SubmitButton>
+                    </StandardButton>
                   </Link>
                 </div>
               </div>

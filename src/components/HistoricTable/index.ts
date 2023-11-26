@@ -1,0 +1,1 @@
+export { HistoricTable } from './HistoricTable';
