@@ -39,3 +39,41 @@ export const addIncomingPlanData = async (data: unknown) => {
     logger.debug(`Plant not found: ${parsedData.id}`);
   }
 };
+
+export const getAllPlantsData = async (userId: string) => {
+  const plants = await prisma.plant.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      plantHistory: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: 1,
+      },
+    },
+  });
+
+  return plants;
+};
+
+export const uploadNewPlant = async (
+  userId: string,
+  name: string,
+  image: string,
+) => {
+  const plant = await prisma.plant.create({
+    data: {
+      name,
+      imageURL: image,
+      userId,
+      light: 0,
+      soilHumidity: 0,
+      airHumidity: 0,
+      temperature: 0,
+    },
+  });
+
+  return plant;
+};

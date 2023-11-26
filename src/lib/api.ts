@@ -36,3 +36,26 @@ export const createUser = async (data: SignUpType) => {
 
   return response;
 };
+
+export const useGetAllPlants = () => {
+  const { data, isLoading, error, mutate } = useSWR('/api/plants', fetcher);
+
+  return {
+    data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
+
+export const createNewPlant = async (formData: FormData) => {
+  const response = await fetch('/api/plants', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      enctype: 'multipart/form-data',
+    },
+  });
+
+  return response;
+};

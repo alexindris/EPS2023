@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import prisma from '@/lib/prisma';
 import { compare } from 'bcrypt';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
@@ -51,26 +52,25 @@ export const authOptions: NextAuthOptions = {
     signOut: '/logout',
   },
   callbacks: {
-    session: ({ session, token }) => {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-          //   randomKey: token.randomKey,
-        },
-      };
-    },
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user }) => {
       if (user) {
-        const u = user as unknown as any;
-        return {
-          ...token,
-          id: u.id,
-          //   randomKey: u.randomKey,
-        };
+        const userData = await prisma.user.findUnique({
+          where: {
+            email: token.email ?? '',
+          },
+        });
+
+        token.id = userData?.id ?? '';
+        token.email = userData?.email ?? '';
       }
       return token;
+    },
+    session: ({ session, token }) => {
+      if (session.user) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+      }
+      return session;
     },
   },
 };

@@ -4,10 +4,15 @@
 
 import { SubmitButton } from '@/components/Buttons/SubmitButton';
 import { Plant } from '@/components/Plant';
+import { useGetAllPlants } from '@/lib/api';
 import Link from 'next/link';
 import { IoMdArrowForward } from 'react-icons/io';
 
 export default function Page() {
+  const { data, isLoading } = useGetAllPlants();
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className='mx-72 items-center text-center'>
       <h1 className='mb-10 text-white text-6xl p-4 font-bold mt-9 '>
@@ -15,37 +20,22 @@ export default function Page() {
       </h1>
 
       <div className='grid grid-cols-3 gap-16'>
-        <Plant
-          plantName='oregano'
-          props={{
-            light: 'sunny',
-            temperature: 'hot',
-            soilHumidity: 'dry',
-            // airHumidity: 'dry',
-          }}
-        />
-        <Plant
-          plantName='fresa'
-          props={{
-            light: 'sunny',
-            temperature: 'hot',
-            soilHumidity: 'dry',
-            // airHumidity: 'dry',
-          }}
-        />
-        <Plant
-          plantName='coliflor'
-          props={{
-            light: 'sunny',
-            temperature: 'hot',
-            soilHumidity: 'dry',
-            // airHumidity: 'dry',
-          }}
-        />
+        {data?.plants.map((plant: any) => (
+          <Plant
+            key={plant.id}
+            plantName={plant.imageURL}
+            props={{
+              light: plant.light,
+              temperature: plant.temperature,
+              soilHumidity: plant.soilHumidity,
+              // airHumidity: 'dry',
+            }}
+          />
+        ))}
       </div>
 
       <div className='h-64' />
-      <Link href='/dashboard/add-plant'>
+      <Link href='/plants/create'>
         <SubmitButton text='Afegir nova planta'>
           <IoMdArrowForward className='ml-2' />
         </SubmitButton>

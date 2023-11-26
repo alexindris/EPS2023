@@ -59,6 +59,7 @@ model Plant {
   updatedAt    DateTime       @updatedAt
   user         User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?
+  imageURL     String?
   plantHistory PlantHistory[]
 }
 
