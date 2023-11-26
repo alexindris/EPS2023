@@ -38,7 +38,7 @@ export default function CreateNewPlantPage() {
     const response = await createNewPlant(formData);
     if (response.status === 200) {
       SuccessToast('Planta creada correctament');
-      router.push('/');
+      router.push('/home');
     } else {
       SendErrorToast('Error al crear la planta');
     }
