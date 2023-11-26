@@ -74,6 +74,9 @@ export const uploadNewPlant = async (
   userId: string,
   name: string,
   image: string,
+  light: { min: string; max: string },
+  soilHumidity: { min: string; max: string },
+  temperature: { min: string; max: string },
 ) => {
   const plant = await prisma.plant.create({
     data: {
@@ -84,6 +87,12 @@ export const uploadNewPlant = async (
       soilHumidity: 0,
       airHumidity: 0,
       temperature: 0,
+      lightThresholdMin: parseInt(light.min, 10),
+      lightThresholdMax: parseInt(light.max, 10),
+      soilHumidityThresholdMin: parseInt(soilHumidity.min, 10),
+      soilHumidityThresholdMax: parseInt(soilHumidity.max, 10),
+      temperatureThresholdMin: parseInt(temperature.min, 10),
+      temperatureThresholdMax: parseInt(temperature.max, 10),
     },
   });
 

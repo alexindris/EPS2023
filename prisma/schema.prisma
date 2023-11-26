@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("DB_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("DB_PRISMA_URL") // uses connection pooling
   directUrl = env("DB_URL_NON_POOLING") // uses a direct connection
 }
 
@@ -46,21 +46,25 @@ model User {
   Plant         Plant[]
 }
 
-// {"id": "P_01_HOME", "light": 94, "soil_humidity": 40, "air_humidity": 65, "temperature": 94}
-
 model Plant {
-  id           String         @id @default(cuid())
-  name         String
-  light        Int
-  soilHumidity Int
-  airHumidity  Int
-  temperature  Int
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  user         User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String?
-  imageURL     String?
-  plantHistory PlantHistory[]
+  id                       String         @id @default(cuid())
+  name                     String
+  light                    Int
+  soilHumidity             Int
+  airHumidity              Int
+  temperature              Int
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
+  user                     User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                   String?
+  imageURL                 String?
+  lightThresholdMin        Int            @default(0)
+  lightThresholdMax        Int            @default(100)
+  soilHumidityThresholdMin Int            @default(0)
+  soilHumidityThresholdMax Int            @default(100)
+  temperatureThresholdMin  Int            @default(0)
+  temperatureThresholdMax  Int            @default(100)
+  plantHistory             PlantHistory[]
 }
 
 model PlantHistory {

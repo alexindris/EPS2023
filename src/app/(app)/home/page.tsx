@@ -26,7 +26,6 @@ export default function Page() {
               light: plant.light,
               temperature: plant.temperature,
               soilHumidity: plant.soilHumidity,
-              // airHumidity: 'dry',
             }}
           />
         ))}
