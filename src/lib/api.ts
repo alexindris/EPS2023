@@ -1,6 +1,7 @@
 import { SignUpType } from '@/validators/signup.validator';
 import useSWR from 'swr';
 import { ModifyProfileType } from '@/validators/modifyProfile.validator';
+import { CreatePlantValidatorType } from '@/validators/createPlant.validator';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -49,13 +50,10 @@ export const useGetAllPlants = () => {
   };
 };
 
-export const createNewPlant = async (formData: FormData) => {
+export const createNewPlant = async (data: CreatePlantValidatorType) => {
   const response = await fetch('/api/plants', {
     method: 'POST',
-    body: formData,
-    headers: {
-      enctype: 'multipart/form-data',
-    },
+    body: JSON.stringify(data),
   });
 
   return response;

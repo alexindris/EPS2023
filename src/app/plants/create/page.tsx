@@ -29,13 +29,18 @@ export default function CreateNewPlantPage() {
     resolver: zodResolver(CreatePlantValidatorSchema),
   });
 
+  const images = [
+    'coliflor',
+    'fresa',
+    'oregano',
+    'perejil',
+    'rucula',
+    'tomate',
+  ];
+
   const router = useRouter();
   const onSubmit = async (data: CreatePlantValidatorType) => {
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('image', data.image[0] as File);
-
-    const response = await createNewPlant(formData);
+    const response = await createNewPlant(data);
     if (response.status === 200) {
       SuccessToast('Planta creada correctament');
       router.push('/home');
@@ -68,22 +73,23 @@ export default function CreateNewPlantPage() {
               {errors.name.message}
             </span>
           )}
-          <div className='grid grid-cols-2 items-center p-5 '>
+          <div className='grid grid-cols-2 items-center p-5'>
             <label className='font-bold text-white text-2xl justify-end text-end mr-10'>
               Selecciona la imatge
             </label>
-            <input
-              type='file'
-              placeholder='password'
-              className='border-2 border-gray-500 rounded-md p-2 my-5 max-w-xs	'
+
+            <select
+              className='border-2 border-gray-500 rounded-md p-2 my-5 max-w-xs'
               {...register('image')}
-            />
+            >
+              <option value=''>Select an image</option>
+              {images.map((image) => (
+                <option key={image} value={image}>
+                  {image}
+                </option>
+              ))}
+            </select>
           </div>
-          {errors.image && (
-            <span className='text-red-500 font-bold'>
-              {errors.image?.message as string}
-            </span>
-          )}
         </div>
         <div className=' flex justify-center items-center p-5 '>
           <div className='w-16' />
