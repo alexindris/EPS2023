@@ -9,7 +9,10 @@ export const NavBar = () => {
       <div
         className={`${croissant.className} flex flex-wrap justify-between items-center mx-10 p-4 `}
       >
-        <a href='/' className='flex items-center space-x-3 rtl:space-x-reverse'>
+        <a
+          href='/home'
+          className='flex items-center space-x-3 rtl:space-x-reverse'
+        >
           <p className='text-white self-center text-5xl whitespace-nowrap'>
             My little garden
           </p>

@@ -50,6 +50,20 @@ export const useGetAllPlants = () => {
   };
 };
 
+export const useGetOnePlant = (id: string) => {
+  const { data, isLoading, error, mutate } = useSWR(
+    `/api/plants/${id}`,
+    fetcher,
+  );
+
+  return {
+    data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
+
 export const createNewPlant = async (data: CreatePlantValidatorType) => {
   const response = await fetch('/api/plants', {
     method: 'POST',

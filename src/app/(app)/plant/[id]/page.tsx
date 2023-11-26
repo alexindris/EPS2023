@@ -2,16 +2,20 @@
 
 import { CircleGraph } from '@/components/CircleGraph';
 import { Remediation } from '@/components/Remediation';
+import { useGetOnePlant } from '@/lib/api';
 import Image from 'next/image';
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
+  const { data, isLoading } = useGetOnePlant(params.id);
+
+  if (isLoading) return <div>Loading...</div>;
   return (
     <>
       <div className='mx-80 items-center text-center flex py-10'>
         <div className='w-1/4'>
           <Image
             className='mx-auto my-auto rounded-3xl object-cover p-4 py-8'
-            src='/images/plants/coliflor.png'
+            src={`/images/plants/${data.plant.imageURL}.png`}
             alt='descobreix'
             width={400}
             height={500}
@@ -24,16 +28,26 @@ export default function Page() {
         </div>
         <div className='w-3/4 rounded-3xl py-6 border border-pop bg-pop px-10'>
           <p className='text-green-nav text-2xl p-4 font-bold'>
-            Nom de la planta: Oregano
+            Nom de la planta: {data.plant.name}
           </p>
           <p className='mb-4 text-green-nav text-2xl p-1 font-bold'>
-            ID: 0cab3e86-2381-48f8-965e-3a3ce14e3fab
+            ID: {data.plant.id}
           </p>
           <div className='flex flex-row justify-between space-x-4'>
-            <CircleGraph texto='Humedad de la planta' porcentaje={10} />
-            <CircleGraph texto='Humedad del aire' porcentaje={78} />
-            <CircleGraph texto='Temperatura' porcentaje={24} degrees={true} />
-            <CircleGraph texto='Luz' porcentaje={32} />
+            <CircleGraph
+              texto='Humedad de la planta'
+              porcentaje={data.plant.soilHumidity}
+            />
+            <CircleGraph
+              texto='Humedad del aire'
+              porcentaje={data.plant.airHumidity}
+            />
+            <CircleGraph
+              texto='Temperatura'
+              porcentaje={data.plant.temperature}
+              degrees={true}
+            />
+            <CircleGraph texto='Luz' porcentaje={data.plant.light} />
           </div>
         </div>
       </div>
