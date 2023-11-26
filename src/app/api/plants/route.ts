@@ -5,7 +5,7 @@ import { BadRequestException } from '@/exceptions';
 import { NextRequest } from 'next/server';
 import { getFile, saveFile } from '@/lib/storage';
 import { getFormatedFileProps } from '@/lib/helper';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 
 export async function GET() {
   try {
