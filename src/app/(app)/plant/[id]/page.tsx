@@ -4,6 +4,9 @@ import { CircleGraph } from '@/components/CircleGraph';
 import { Remediation } from '@/components/Remediation';
 import { useGetOnePlant } from '@/lib/api';
 import Image from 'next/image';
+import Link from 'next/link';
+import { IoMdArrowForward } from 'react-icons/io';
+import { StandardButton } from '@/components/Buttons/StandardButton';
 
 export default function Page({ params }: { params: { id: string } }) {
   const { data, isLoading } = useGetOnePlant(params.id);
@@ -11,7 +14,7 @@ export default function Page({ params }: { params: { id: string } }) {
   if (isLoading) return <div>Loading...</div>;
   return (
     <>
-      <div className='mx-80 items-center text-center flex py-10'>
+      <div className='mx-32 items-center text-center flex py-10'>
         <div className='w-1/4'>
           <Image
             className='mx-auto my-auto rounded-3xl object-cover p-4 py-8'
@@ -21,8 +24,8 @@ export default function Page({ params }: { params: { id: string } }) {
             height={500}
             style={{
               background: 'white 50% / cover no-repeat',
-              width: '200px', // ajusta el ancho según tus necesidades
-              height: '200px', // ajusta la altura según tus necesidades
+              width: '200px',
+              height: '200px',
             }}
           />
         </div>
@@ -49,6 +52,14 @@ export default function Page({ params }: { params: { id: string } }) {
             />
             <CircleGraph texto='Luz' porcentaje={data.plant.light} />
           </div>
+          <Link href={`/historic/${data.plant.id}`}>
+            <StandardButton
+              text='Afegir nova planta'
+              className='rounded-full text-white bg-orange-btn p-5 text-xs mt-4'
+            >
+              <IoMdArrowForward className='ml-2' />
+            </StandardButton>
+          </Link>
         </div>
       </div>
       <div className='mx-80 items-center text-center'>
@@ -83,19 +94,19 @@ export default function Page({ params }: { params: { id: string } }) {
           />
           <Remediation
             texto={
-              'Debido a que el orégano es una planta usada normalmente en la cocina y que además cuenta con muchos beneficios para nuestra salud, extraer y secar sus hojas es la principal finalidad de cultivarla, por eso es importante conocer el momento adecuado para hacerlo. Se recomienda cortar las hojas justo después de que la planta florezca, el momento idóneo para la recolección.'
+              "A causa que l'orenga és una planta normalment utilitzada a la cuina i que, a més a més, ofereix molts beneficis per a la nostra salut, extreure i assecar les seves fulles és la principal finalitat de cultivar-la, per això és important conèixer el moment adequat per fer-ho. Es recomana tallar les fulles just després que la planta floreixi, el moment idoni per a la recol·lecció."
             }
             number={4}
           />
           <Remediation
             texto={
-              'También debes tener en cuenta el espacio en el que ubicarás tu planta de orégano. La misma puede recibir el sol directo sin problema , de hecho es conveniente que así sea aunque también puedes ubicarla en un espacio en el que cuente con sol y con sombra en distintos momentos del día.'
+              "També has de tenir en compte l'espai on ubicaràs la teva planta d'orenga. Pot rebre la llum del sol directament sense cap problema, de fet, és convenient que així sigui, tot i que també pots situar-la en un espai on tingui sol i ombra en diferents moments del dia."
             }
             number={5}
           />
           <Remediation
             texto={
-              'Una vez que hemos extraído las hojas de orégano debemos reunirlas en manojos y colgarlos en un lugar seco y ventilado para secarlos. Cuando estén secos podremos almacenar las hojas en un recipiente preferiblemente hermético para una mejor conservación, añadiéndolas a nuestras recetas favoritas para aportarles su delicioso aroma y sabor.'
+              "Un cop hem extret les fulles d'orenga, hem de reunir-les en feixos i penjar-les en un lloc sec i ventilat per assecar-les. Quan estiguin secs, podrem emmagatzemar les fulles en un recipient preferiblement hermètic per a una millor conservació, afegint-les a les nostres receptes favorites per donar-los el seu deliciós aroma i sabor."
             }
             number={6}
           />

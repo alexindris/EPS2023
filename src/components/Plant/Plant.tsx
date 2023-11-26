@@ -12,7 +12,7 @@ export const Plant = ({ plantName, plantId, props }: PlantProps) => {
       <div className='grid grid-cols-2 bg-white rounded-3xl divide-x-2'>
         <div className='flex items-center justify-center'>
           <Image
-            src={`/public/images/plants/${plantName}.png`}
+            src={`/images/plants/${plantName}.png`}
             alt='Plant'
             width={200}
             height={200}
