@@ -25,7 +25,8 @@
     "reset": "prisma migrate reset --force",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "plop": "plop"
+    "plop": "plop",
+    "prisma:deploy": "prisma migrate deploy "
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.454.0",

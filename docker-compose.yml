@@ -11,24 +11,21 @@ services:
     environment:
       - SHELL=/bin/bash # Set the SHELL environment variable
     command: sleep infinity
-  mysql:
-    image: 'mysql/mysql-server:latest'
+  postgres:
+    image: 'postgres:latest'
     ports:
-      - '${DB_PORT:-3306}:${DB_PORT:-3306}'
+      - '${DB_PORT:-5432}:${DB_PORT:-5432}'
     environment:
-      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ROOT_HOST: '%'
-      MYSQL_DATABASE: '${DB_DATABASE}'
-      MYSQL_USER: '${DB_USERNAME}'
-      MYSQL_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_TCP_PORT: ${DB_PORT:-3306}
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
     volumes:
-      - 'chainsaw-project-mysql:/var/lib/mysql'
+      - 'chainsaw-project-postgres:/var/lib/postgresql/data'
     networks:
       - chainsaw-project
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME}']
       retries: 3
       timeout: 5s
   s3-storage:
@@ -57,4 +54,6 @@ networks:
 
 volumes:
   chainsaw-project-mysql:
+    driver: local
+  chainsaw-project-postgres:
     driver: local
