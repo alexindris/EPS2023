@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE `PlantHistory` ADD COLUMN `date` DATE NOT NULL;
+ALTER TABLE "PlantHistory" ADD COLUMN     "date" DATE NOT NULL;
