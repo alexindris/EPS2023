@@ -22,7 +22,7 @@ export default function Page() {
         />
         <div className='h-2' />
         <div className='flex justify-center space-x-10'>
-          <Link href='/dashboard'>
+          <Link href='/home'>
             <SubmitButton text='Anar al teu hort'>
               <IoMdArrowForward className='ml-2' />
             </SubmitButton>
