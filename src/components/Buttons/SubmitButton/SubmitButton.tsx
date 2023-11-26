@@ -1,11 +1,12 @@
 import { SubmitButtonProps } from './types';
 
-export const SubmitButton = ({ text, children }: SubmitButtonProps) => {
+export const SubmitButton = ({
+  text,
+  children,
+  className = 'rounded-full text-white text-xl bg-orange-btn p-5',
+}: SubmitButtonProps) => {
   return (
-    <button
-      className='rounded-full text-white text-xl bg-orange-btn p-5'
-      type='submit'
-    >
+    <button className={className} type='submit'>
       <div className='flex items-center'>
         {text}
         {children}

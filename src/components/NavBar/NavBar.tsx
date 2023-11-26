@@ -1,7 +1,7 @@
 'use client';
 
 import { croissant } from '@/lib/fonts';
-import Image from 'next/image';
+import { UserMenu } from '@/components/UserMenu';
 // eslint-disable-next-line camelcase
 
 export const NavBar = () => {
@@ -16,12 +16,7 @@ export const NavBar = () => {
           </p>
         </a>
         <div className='flex items-center space-x-6 rtl:space-x-reverse cursor-pointer'>
-          <Image
-            src='/images/profile.png'
-            alt='profile'
-            width={51}
-            height={49}
-          />
+          <UserMenu />
         </div>
       </div>
     </nav>
