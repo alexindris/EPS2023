@@ -1,6 +1,6 @@
 'use client';
 
-import { SubmitButton } from '@/components/Buttons/SubmitButton';
+import { StandardButton } from '@/components/Buttons/StandardButton';
 import { Plant } from '@/components/Plant';
 import { useGetAllPlants } from '@/lib/api';
 import Link from 'next/link';
@@ -34,9 +34,9 @@ export default function Page() {
 
       <div className='h-64' />
       <Link href='/plants/create'>
-        <SubmitButton text='Afegir nova planta'>
+        <StandardButton text='Afegir nova planta'>
           <IoMdArrowForward className='ml-2' />
-        </SubmitButton>
+        </StandardButton>
       </Link>
     </div>
   );
