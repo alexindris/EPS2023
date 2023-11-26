@@ -2,7 +2,6 @@
 
 import { croissant } from '@/lib/fonts';
 import { UserMenu } from '@/components/UserMenu';
-// eslint-disable-next-line camelcase
 
 export const NavBar = () => {
   return (

@@ -18,7 +18,6 @@ import { useRouter } from 'next/navigation';
 
 import { useForm } from 'react-hook-form';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { IoMdArrowForward } from 'react-icons/io';
 
 export default function CreateNewPlantPage() {

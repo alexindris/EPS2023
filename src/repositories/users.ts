@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { BadRequestException } from '@/exceptions';
 import { logger } from '@/lib/logger';
 import prisma from '@/lib/prisma';

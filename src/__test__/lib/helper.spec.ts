@@ -47,11 +47,8 @@ describe('checkSentFile', () => {
         value: 1000000,
       },
     });
-    expect(
-      () =>
-        // eslint-disable-next-line implicit-arrow-linebreak
-        checkSentFile(file, ['text/plain'], 0.001),
-      // eslint-disable-next-line function-paren-newline
-    ).toThrow('File size is too big');
+    expect(() => checkSentFile(file, ['text/plain'], 0.001)).toThrow(
+      'File size is too big',
+    );
   });
 });
