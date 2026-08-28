@@ -1,29 +1,37 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+/node_modules/
+/.pnp/
+.pnp.*
+/.pnpm-store/
 
 # testing
-/coverage
+/coverage/
 
 # next.js
 /.next/
 /out/
 
 # production
-/build
+/build/
 
 # misc
 .DS_Store
 *.pem
+*.key
+*.p12
+*.pfx
 
 # debug
 npm-debug.log*
+*.log
 
-# local env files
+# local env files and device configuration
 .env
+.env.*
+!.env.example
+/arduino/config.h
 
 # vercel
 .vercel
@@ -33,11 +41,4 @@ npm-debug.log*
 next-env.d.ts
 
 
-.pnp.*
-prisma/migrations/migration_lock.toml
-
-/s3-storage/*
-!/s3-storage/.init
-logs
-"/*
-/.pnpm-store/*
+/logs/

@@ -2,6 +2,11 @@
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  // Indicate the urls that require authentication
-  matcher: ['/home'],
+  matcher: [
+    '/home',
+    '/profile',
+    '/historic/:path*',
+    '/plant/:path*',
+    '/plants/:path*',
+  ],
 };

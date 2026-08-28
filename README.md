@@ -1,3 +1,123 @@
+# My Little Garden
+
+My Little Garden is a three-person IoT plant-monitoring prototype built during
+an approximately 22-hour HackEPS 2023 challenge. The prototype connected plant
+sensors to an MQTT ingestion path, stored readings with Prisma and PostgreSQL,
+and showed plant status and history in a Next.js application.
+
+This repository is a historical hackathon prototype, not a production service.
+The current tree contains only local-development placeholders; real Wi-Fi,
+MQTT, database, and authentication credentials must stay in ignored local
+configuration.
+
+## Historical prototype architecture
+
+The MQTT subscriber is retained as unexposed reference code; it is not started
+by the current application.
+
+```text
+ESP8266 sensors
+      |
+      | MQTT
+      v
+MQTT subscriber and Next.js API routes
+      |
+      v
+Prisma / PostgreSQL --> plant status and history views
+```
+
+The `data/` notebooks capture anomaly-detection and regression experiments.
+They should not be read as evidence of a completed production forecasting
+system.
+
+## Àlex's contributions
+
+This was a team project. Public repository history and Àlex Tello Vidal's
+project record support his contributions to:
+
+- MQTT ingestion and persistence for plant readings;
+- Prisma/PostgreSQL data models, migrations, and plant-history APIs;
+- configurable plant thresholds;
+- anomaly-detection and regression experiments in Python notebooks.
+
+The rest of the repository contains work from all three hackathon teammates;
+the project should not be presented as the work of one person.
+
+## Run locally
+
+Prerequisites:
+
+- Node.js 20 (Node.js 18.17 or newer is also supported);
+- Corepack and pnpm 8.7.1;
+- Docker with Docker Compose.
+
+Create local configuration:
+
+```bash
+cp .env.example .env
+```
+
+Generate a local NextAuth secret with `openssl rand -base64 32` and place it in
+`.env`. Then install dependencies and start the local database:
+
+```bash
+corepack pnpm install --frozen-lockfile
+docker compose up -d --wait postgres
+corepack pnpm generate
+corepack pnpm migrate
+corepack pnpm dev
+```
+
+The database port binds to `127.0.0.1` by default. The values in
+`.env.example` are local-only examples and must not be reused outside local
+development.
+
+## Arduino configuration
+
+Copy the ignored device configuration before compiling the Arduino sketch:
+
+```bash
+cp arduino/config.example.h arduino/config.h
+```
+
+This historical sketch uses plaintext MQTT. Run it only on an isolated local
+test network with throwaway credentials; do not connect it to a public or other
+non-local broker. Never commit `arduino/config.h`. A real deployment must use a
+TLS client with certificate validation instead.
+
+The sketch targets an ESP8266 NodeMCU-style board and uses the ESP8266 board
+package plus PubSubClient, ArduinoJson, and the DHT sensor library. Install and
+pin compatible versions locally before compiling. For example, with a prepared
+Arduino CLI environment:
+
+```bash
+arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 arduino
+```
+
+The historical MQTT subscriber remains as reference code in `src/lib/mqtt.ts`,
+but it is deliberately not exposed through a web route. A deployment should
+run exactly one managed subscriber outside request handlers and use a
+TLS-protected broker.
+
+## Quality checks
+
+```bash
+corepack pnpm lint:strict
+corepack pnpm format:check
+corepack pnpm generate
+corepack pnpm typecheck
+corepack pnpm test -- --runInBand
+corepack pnpm build
+```
+
+## Challenge source
+
+The prototype responded to the plant-monitoring challenge published by
+[Eurecat's Applied Artificial Intelligence team](https://github.com/Applied-Artificial-Intelligence-Eurecat/hackeps).
+
+<details>
+<summary>Original HackEPS challenge brief (Catalan)</summary>
+
 <p align="right"><a href="https://github.com/Applied-Artificial-Intelligence-Eurecat/hackeps/blob/main/README.md">Català</a> | <a href="https://github.com/Applied-Artificial-Intelligence-Eurecat/hackeps/blob/main/README-es.md">Español</a> | <a href="https://github.com/Applied-Artificial-Intelligence-Eurecat/hackeps/blob/main/README-en.md">English</a></p>
 
 ---
@@ -81,19 +201,8 @@ Ideeu, dissenyeu i desenvolupeu eines relacionades amb la cura de l'hort digital
 
 ### Recursos 📦
 
-Inicialment disposareu d'accés a un Broker MQTT:
-
-> IP: 84.88.76.18
->
-> Port: 1883
->
-> Usuari i contrasenya: _Vine a preguntar!_
-
-Topics MQTT:
-
-> `hackeps/eurecat`
->
-> `hackeps/{Nom assignat a l'equip}`
+The original event-specific broker details have been removed. Use an ignored
+local `.env` file and `arduino/config.h` for any current MQTT configuration.
 
 Una vegada avançada la missió margarida, podreu sol·licitar el _Ultimate SensorPlanta Kit 2023_ a la nostra taula, el qual constarà de:
 | **ESP3288** | **Cable MicroUSB** | **Planta** |
@@ -142,3 +251,5 @@ l'eficàcia, l'eficiència, l'excel·lència i l'èxit en les solucions, el treb
 - 200€ pel 2n Premi
 
 Molta sort!
+
+</details>

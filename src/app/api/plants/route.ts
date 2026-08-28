@@ -1,20 +1,12 @@
 /* eslint-disable camelcase */
 import { errorHandler } from '@/lib/errorHandler';
-import { getServerSession } from 'next-auth';
 import { getAllPlantsData, uploadNewPlant } from '@/repositories/plants';
-import { BadRequestException } from '@/exceptions';
 import { NextRequest } from 'next/server';
-import { authOptions } from '@/lib/auth';
+import { requireUserId } from '@/lib/session';
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions);
-
-    const userId = session?.user?.id;
-
-    if (!userId) {
-      throw new BadRequestException('User not found');
-    }
+    const userId = await requireUserId();
 
     const plants = await getAllPlantsData(userId);
 
@@ -43,16 +35,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-
-    const userId = session?.user?.id;
-
-    if (!userId) {
-      throw new BadRequestException('User not found');
-    }
+    const userId = await requireUserId();
     const { name, image, light, soil_humidity, temperature } =
       (await req.json()) as {
-        userId: string;
         name: string;
         image: string;
         light: { min: string; max: string };

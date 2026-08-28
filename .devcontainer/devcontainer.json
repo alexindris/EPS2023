@@ -13,7 +13,7 @@
   // connected. This is typically a file mount in .devcontainer/docker-compose.yml
   "workspaceFolder": "/usr/src/app",
 
-  "onCreateCommand": "curl -fsSL https://get.pnpm.io/install.sh | sh -",
+  "onCreateCommand": "corepack pnpm install --frozen-lockfile",
   "customizations": {
     "vscode": {
       "extensions": [
