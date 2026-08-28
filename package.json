@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "turbo": "next dev --turbo",
-    "backend": "ts-node src/backend/worker.ts",
     "lint": "next lint",
     "lint:strict": "eslint --max-warnings=0 src",
     "lint:fix": "eslint src --fix && pnpm format",
@@ -29,8 +28,6 @@
     "prisma:deploy": "prisma migrate deploy "
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.454.0",
-    "@aws-sdk/lib-storage": "^3.454.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",

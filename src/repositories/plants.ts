@@ -99,7 +99,11 @@ export const uploadNewPlant = async (
   return plant;
 };
 
-export const getHistory = async (plantId: string, days: number) => {
+export const getHistory = async (
+  plantId: string,
+  userId: string,
+  days: number,
+) => {
   const firstDay = new Date();
   const today = new Date();
   firstDay.setDate(firstDay.getDate() - days);
@@ -107,6 +111,9 @@ export const getHistory = async (plantId: string, days: number) => {
     by: ['date'],
     where: {
       plantId,
+      plant: {
+        userId,
+      },
       createdAt: {
         gte: firstDay.toISOString(),
         lte: today.toISOString(),

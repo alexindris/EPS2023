@@ -1,21 +1,14 @@
-import { BadRequestException, NotFoundException } from '@/exceptions';
-import { authOptions } from '@/lib/auth';
+import { NotFoundException } from '@/exceptions';
 import { errorHandler } from '@/lib/errorHandler';
+import { requireUserId } from '@/lib/session';
 import { getPlantById } from '@/repositories/plants';
-import { getServerSession } from 'next-auth';
 
 export async function GET(
   req: Request,
   { params }: { params: { id: string } },
 ) {
   try {
-    const session = await getServerSession(authOptions);
-
-    const userId = session?.user?.id;
-
-    if (!userId) {
-      throw new BadRequestException('User not found');
-    }
+    const userId = await requireUserId();
 
     const plantId = params.id;
 

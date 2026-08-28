@@ -3,9 +3,6 @@ const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
-  images: {
-    domains: ['s3-storage'],
-  },
   reactStrictMode: true,
 };
 

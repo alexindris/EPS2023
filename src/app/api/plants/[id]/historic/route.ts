@@ -1,25 +1,23 @@
-import { BadRequestException } from '@/exceptions';
-import { authOptions } from '@/lib/auth';
+import { NotFoundException } from '@/exceptions';
 import { errorHandler } from '@/lib/errorHandler';
-import { getHistory } from '@/repositories/plants';
-import { getServerSession } from 'next-auth';
+import { requireUserId } from '@/lib/session';
+import { getHistory, getPlantById } from '@/repositories/plants';
 
 export async function GET(
   req: Request,
   { params }: { params: { id: string } },
 ) {
   try {
-    const session = await getServerSession(authOptions);
-
-    const userId = session?.user?.id;
-
-    if (!userId) {
-      throw new BadRequestException('User not found');
-    }
+    const userId = await requireUserId();
 
     const plantId = params.id;
+    const ownedPlant = await getPlantById(plantId, userId);
 
-    const plant = await getHistory(plantId, 7);
+    if (!ownedPlant) {
+      throw new NotFoundException('Plant not found');
+    }
+
+    const plant = await getHistory(plantId, userId, 7);
 
     return Response.json({ plant }, { status: 200 });
   } catch (error) {

@@ -20,36 +20,40 @@ jobs:
     if: github.event.pull_request.draft == false
     name: ⬣ Code Quality
     runs-on: ubuntu-latest
+    env:
+      DB_PRISMA_URL: postgresql://app:ci-only@localhost:5432/special_chainsaw?schema=public
+      DB_URL_NON_POOLING: postgresql://app:ci-only@localhost:5432/special_chainsaw?schema=public
+      NEXTAUTH_URL: http://localhost:3000
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: ⎔ Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
       - name: 📥 Download deps
-        run: pnpm install
+        run: corepack pnpm install --frozen-lockfile
 
       - name: 🔬 Lint
-        run: pnpm lint:strict
+        run: corepack pnpm lint:strict
 
       - name: 💅 Prettier check
-        run: pnpm format:check
+        run: corepack pnpm format:check
 
       - name: 📝 Generate prisma
-        run: pnpm generate
+        run: corepack pnpm generate
 
       - name: 🔎 Type check
-        run: pnpm typecheck
+        run: corepack pnpm typecheck
 
-      # - name: 🃏 Run jest
-      #   run: pnpm test:coverage
+      - name: 🃏 Run jest
+        run: corepack pnpm test -- --runInBand
 
-      # - name: 🔧 Run Build
-      #   run: pnpm build
+      - name: 🔧 Run Build
+        run: NEXTAUTH_SECRET="$(openssl rand -base64 32)" corepack pnpm build
